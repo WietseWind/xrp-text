@@ -24,7 +24,7 @@ CREATE TABLE `transactions` (
   KEY `valid` (`valid`),
   KEY `twofactor` (`twofactor`),
   KEY `responsetype` (`responsetype`)
-) ENGINE=MyISAM AUTO_INCREMENT=72 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- Create syntax for TABLE 'users'
 CREATE TABLE `users` (
@@ -40,4 +40,4 @@ CREATE TABLE `users` (
   KEY `balance` (`balance`),
   KEY `created` (`created`),
   KEY `updated` (`updated`)
-) ENGINE=InnoDB AUTO_INCREMENT=10004 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
