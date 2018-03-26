@@ -13,7 +13,7 @@ class XrpPrice {
         return Math.floor(parseFloat(Amount) * this.price[Currency.toLowerCase().trim()] * 100) / 100
       },
       getXrp: (Currency, Amount) => {
-        return Math.floor(parseFloat(Amount) * this.price[Currency.toLowerCase().trim()] * 1000000) / 1000000
+        return Math.floor(parseFloat(Amount) / this.price[Currency.toLowerCase().trim()] * 1000000) / 1000000
       },
       fetchPrice: (Currency) => {
         return new Promise((resolve, reject) => {
