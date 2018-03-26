@@ -78,7 +78,6 @@ module.exports = (message, price) => {
   }
 
   let response = {
-    error: true,
     message: parseMessage,
     parsed: parsed
   }

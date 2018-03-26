@@ -12,7 +12,11 @@
     },
     "ripple": {
       "server": "wss://s1.ripple.com",
-      "account": "rHE...3G"
+      "account": "rHE...3G",
+      "keypair": {
+        "publicKey": "03b..9acd",
+        "privateKey": "763..afc3"
+      }
     },
     "database": {
       "mysql": {

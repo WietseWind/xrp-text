@@ -31,6 +31,10 @@ class Database extends EventEmitter {
         return this.query(query, [ fromUser.tag, 'TRANSFER', xrp * -1, origin, fromUser.phone, toUser.phone ])
           .then(result => this.query(query, [ toUser.tag, 'TRANSFER', xrp, origin, fromUser.phone, toUser.phone ]))
       },
+      insertConfirmedWithdrawal: (origin, xrp, fromUser, walletAndDtag) => {
+        let query = 'INSERT INTO `transactions` SET `user` = ?, `type` = ?, `amount` = ?, `valid` = 1, `origin` = ?, `from` = ?, `to` = ?'
+        return this.query(query, [ fromUser.tag, 'WITHDRAW', xrp * -1, origin, fromUser.phone, walletAndDtag ])
+      },
       getTransaction: (txId) => {
         return this.query('SELECT * FROM `transactions` WHERE `id` = ?', [ txId ])
       },
@@ -78,7 +82,7 @@ class Database extends EventEmitter {
       persistOutboundMessage: (user, message, sid, body, type) => {
         let twofactor = (typeof message.authCode === 'string' ? message.authCode : null)
         let origin = (typeof message.origin !== 'undefined' ? message.origin : null)
-        type = (typeof type === 'string' && ([ 'BALANCE', 'HELP', 'DEPOSIT' ]).indexOf(type.toUpperCase()) > -1 ? type.toUpperCase() : null)
+        type = (typeof type === 'string' && ([ 'HELP', 'BALANCE', 'DEPOSIT', 'WITHDRAWAL', 'TRANSFER' ]).indexOf(type.toUpperCase()) > -1 ? type.toUpperCase() : null)
         return this.query('INSERT INTO `transactions` (`type`, `user`, `from`, `to`, `message`, `transaction`, `responsetype`, `twofactor`, `origin`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', [
           'TEXTOUT', user.tag, message.to, message.from, body, sid, type, twofactor, origin
         ])
@@ -89,8 +93,13 @@ class Database extends EventEmitter {
       confirmTx: (id) => {
         return this.query('UPDATE `transactions` SET `valid` = 1 WHERE `id` = ?', [ id ])
       },
+      setXrplTxHash: (tx, hash) => {
+        return this.query('UPDATE `transactions` SET `transaction` = ? WHERE `id` = ?', [ hash, tx ])
+      },
       updateUserBalance: (user) => {
-        return this.query('SELECT SUM(amount) as `balance` FROM `transactions` WHERE `valid` = 1 AND `user` = ?', [ user ])
+        // ALWAYS charge `twofactor` records, since `valid` is used to invalidate the record when used, but if there's an 
+        // amount, it's the Text charge - and the Text charge needs to be charged to the user.
+        return this.query('SELECT SUM(amount) as `balance` FROM `transactions` WHERE (`valid` = 1 OR (`valid` = 0 AND `twofactor` IS NOT NULL)) AND `user` = ?', [ user ])
           .then(result => this.query('UPDATE `users` SET `balance` = ? WHERE `tag` = ?', [ result[0].balance, user ]))
           .then(result => this.query('SELECT * FROM `users` WHERE `tag` = ?', [ user ]))
       },

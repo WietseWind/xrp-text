@@ -7,7 +7,7 @@ CREATE TABLE `transactions` (
   `from` varchar(100) COLLATE utf8_bin NOT NULL DEFAULT '',
   `to` varchar(100) COLLATE utf8_bin NOT NULL DEFAULT '',
   `message` varchar(320) COLLATE utf8_bin DEFAULT NULL,
-  `responsetype` enum('HELP','BALANCE','DEPOSIT') COLLATE utf8_bin DEFAULT NULL,
+  `responsetype` enum('HELP','BALANCE','DEPOSIT','WITHDRAWAL','TRANSFER') COLLATE utf8_bin DEFAULT NULL,
   `transaction` varchar(100) COLLATE utf8_bin DEFAULT NULL,
   `amount` decimal(20,6) DEFAULT NULL,
   `valid` int(1) unsigned NOT NULL DEFAULT '0',
