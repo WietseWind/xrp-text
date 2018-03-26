@@ -51,7 +51,7 @@ class ConnectRippled extends EventEmitter {
 
         Connection.send({
           command: 'subscribe',
-          accounts: [ config.ripple.account, 'rDsbeomae4FXwgQTJp9Rs64Qg9vDiTCdBv', 'rENDnFwR3CPvrsPjD9XXeqVoXeVt2CpPWX' ]
+          accounts: [ config.ripple.account ]
         }).then((Response) => {
           // console.log('Subscribed', Response)
         }).catch((err) => {
