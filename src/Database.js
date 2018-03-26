@@ -113,8 +113,10 @@ class Database extends EventEmitter {
         return this.query('UPDATE `transactions` SET `amount` = ?, `valid` = IF(`twofactor` IS NULL, 1, `valid`) WHERE `transaction` = ?', [ amount, priceinfo.sid ])
           .then(result => this.query('SELECT `user` FROM `transactions` WHERE `transaction` = ?', [ priceinfo.sid ]))
           .then((transaction) => {
-            user = transaction[0].user
-            return this.updateUserBalance(user)
+            if (transaction.length > 0) {
+              user = transaction[0].user
+              return this.updateUserBalance(user)
+            }
           })
       },
       processTransaction: (transaction) => {
