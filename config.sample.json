@@ -7,7 +7,8 @@
     },
     "twilio": {
       "sid": "AC13467...d83e7",
-      "token": "8ba9...bd1b"
+      "token": "8ba9...bd1b",
+      "defaultno": "+3112...9330"
     },
     "ripple": {
       "server": "wss://s1.ripple.com",

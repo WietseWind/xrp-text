@@ -23,7 +23,7 @@ Promise.all([ _config, _rippled, _twilio, _database ]).then((values) => {
       console.log('## Inbound [message] from [user]:', message, user)
       database.persistInboundMessage(user, message)
 
-      let body = `Please say:\n\n"balance" or\n"deposit" or\n"send AMOUNT to PHONENUMBER" or\n"withdraw AMOUNT to WALLETADDRESS TAG"`
+      let body = `Please enter:\n\n"balance" or\n"deposit" or\n"send AMOUNT to PHONENUMBER" or\n"withdraw AMOUNT to WALLETADDRESS TAG"`
       let type = 'HELP'
 
       /**
@@ -36,10 +36,10 @@ Promise.all([ _config, _rippled, _twilio, _database ]).then((values) => {
         let eur_balance = price.get('eur', balance)
         body = `Your balance is:\n${balance} XRP`
         if (balance > 0) {
-          body += `\n\nThis is ${usd_balance} USD or ${eur_balance} EUR.`
+          body += `\n\nThis is ${usd_balance} USD / ${eur_balance} EUR.`
         }
         if (balance < 1) {
-          body += `\n\nSend "deposit" for top up instructions.`
+          body += `\n\nDeposit XRP to: \n${user.wallet}\n\nUse Destination Tag:\n${user.tag}\n\nDO NOT FORGET THE DESTINATION TAG!`
         }
         type = 'BALANCE'
       }
@@ -50,6 +50,24 @@ Promise.all([ _config, _rippled, _twilio, _database ]).then((values) => {
       if (message.body.toLowerCase().match(/d[e]*p[o]*s[i]*[t]*/)) {
         body = `Deposit XRP to: \n${user.wallet}\n\nUse Destination Tag:\n${user.tag}\n\nDO NOT FORGET THE DESTINATION TAG!`
         type = 'DEPOSIT'
+      }
+
+      /**
+       * WITHDRAW
+       */
+      if (message.body.toLowerCase().match(/w[i]*t[h]*[d]*raw/)) {
+        // withdraw AMOUNT to WALLETADDRESS TAG
+        body = `NOT IMPLEMENTED YET, ALMOST DONE!`
+        type = null
+      }
+
+      /**
+       * SEND
+       */
+      if (message.body.toLowerCase().match(/sen[dt]/)) {
+        // transfer AMOUNT to PHONENUMBER
+        body = `NOT IMPLEMENTED YET, ALMOST DONE!`
+        type = null
       }
 
       /**
@@ -91,7 +109,25 @@ Promise.all([ _config, _rippled, _twilio, _database ]).then((values) => {
    * Watch for transactions
    */
   rippled.on('transaction', (transaction) => {
-    console.log('transaction', transaction)
+    console.log('== XRP Ledger Transaction', transaction)
+    database.processTransaction(transaction).then((result) => {
+      console.log('Transaction processed', result)
+
+      let usd_balance = price.get('usd', result.balance)
+      let eur_balance = price.get('eur', result.balance)
+      let body = `Your deposit of ${transaction.amount} XRP is received!\n\nYour new balance is ${result.balance} XRP, this is ${usd_balance} USD / ${eur_balance} EUR.`
+      let message = {
+        from: typeof result.user.lastno === 'string' ? result.user.lastno : config.twilio.defaultno,
+        to: result.user.phone
+      }
+      console.log('Send to', message.to, body.replace(/\n/g, ' ').trim())
+      twilio.send(message.from, message.to, body).then((sid) => {
+        console.log('>> Deposit confirmation', sid)
+        database.persistOutboundMessage(result.user, message, sid, body)
+      })
+    }).catch((err) => {
+      console.log('!! Transaction error', err.message)
+    })
   })
 }).catch((e) => {
   console.log(e)

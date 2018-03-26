@@ -34,10 +34,12 @@ CREATE TABLE `users` (
   `balance` decimal(20,6) NOT NULL DEFAULT '0.000000',
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `lastno` varchar(20) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`tag`),
   UNIQUE KEY `phone` (`phone`),
   KEY `wallet` (`wallet`),
   KEY `balance` (`balance`),
   KEY `created` (`created`),
-  KEY `updated` (`updated`)
+  KEY `updated` (`updated`),
+  KEY `lastno` (`lastno`)
 ) ENGINE=MyISAM AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;

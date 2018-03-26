@@ -67,7 +67,11 @@ class Database extends EventEmitter {
           this.query('INSERT INTO `transactions` (`type`, `user`, `from`, `to`, `message`, `transaction`) VALUES (?, ?, ?, ?, ?, ?)', [
             'TEXTIN', user.tag, message.from, message.to, message.body, message.sid
           ]).then((result) => {
-            resolve(result.insertId)
+            this.query('UPDATE `users` SET `lastno` = ? WHERE `tag` = ?', [ message.to, user.tag ]).then((update) => {
+              resolve(result.insertId)
+            }).catch((err) => {
+              reject(err)
+            })
           }).catch((err) => {
             reject(err)
           })
@@ -89,7 +93,7 @@ class Database extends EventEmitter {
         return new Promise((resolve, reject) => {
           this.query('UPDATE `transactions` SET `amount` = ?, `valid` = 1 WHERE `transaction` = ?', [ xrp * -1, priceinfo.sid ]).then((result) => {
             this.query('SELECT `user` FROM `transactions` WHERE `transaction` = ?', [ priceinfo.sid ]).then((transaction) => {
-              this.query('SELECT SUM(amount) as `balance` FROM `transactions` WHERE `user` = ?', [ transaction[0].user ]).then((result) => {
+              this.query('SELECT SUM(amount) as `balance` FROM `transactions` WHERE `valid` = 1 AND `user` = ?', [ transaction[0].user ]).then((result) => {
                 this.query('UPDATE `users` SET `balance` = ? WHERE `tag` = ?', [ result[0].balance, transaction[0].user ]).then((result) => {
                   resolve(true)
                 }).catch((err) => {
@@ -101,6 +105,42 @@ class Database extends EventEmitter {
             }).catch((err) => {
               reject(err)
             })  
+          }).catch((err) => {
+            reject(err)
+          })
+        })
+      },
+      processTransaction: (transaction) => {
+        return new Promise((resolve, reject) => {
+          this.query('SELECT * FROM `users` WHERE (`wallet` = ? AND `tag` = ?) OR (`wallet` = ? AND `tag` = ?)', [ 
+            transaction.from, transaction.tag,
+            transaction.to, transaction.tag
+          ]).then((result) => {
+            if (result.length > 0) {
+              let user = result[0]
+              this.query('INSERT INTO `transactions` (`type`, `user`, `from`, `to`, `message`, `transaction`, `amount`, `valid`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [
+                'DEPOSIT', user.tag, transaction.from, result[0].phone, null, transaction.hash, transaction.amount, 1
+              ]).then((result) => {
+                this.query('SELECT SUM(amount) as `balance` FROM `transactions` WHERE `valid` = 1 AND `user` = ?', [ user.tag ]).then((result) => {
+                  let newBalance = result[0].balance
+                  this.query('UPDATE `users` SET `balance` = ? WHERE `tag` = ?', [ newBalance, user.tag ]).then((result) => {
+                    resolve({
+                      user: user,
+                      transaction: transaction,
+                      balance: newBalance
+                    })
+                  }).catch((err) => {
+                    reject(err)
+                  })              
+                }).catch((err) => {
+                  reject(err)
+                })
+              }).catch((err) => {
+                reject(err)
+              })  
+            } else {
+              reject(new Error('Cannot find user for transaction (wallet + tag)'))
+            }
           }).catch((err) => {
             reject(err)
           })

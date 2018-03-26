@@ -20,15 +20,29 @@ class ConnectRippled extends EventEmitter {
         Connection.on('transaction', (t) => {
           // console.log('## TRANSACTION', t)
           if (t.transaction.TransactionType === 'Payment') {
-            this.emit('transaction', t)
+            // this.emit('transaction', t)
+            let amount = parseInt(t.transaction.Amount)
+            if (t.meta && typeof t.meta.delivered_amount !== 'undefined') {
+              amount = t.meta.delivered_amount
+            }
+            if (t.meta && typeof t.meta.DeliveredAmount !== 'undefined') {
+              amount = t.meta.DeliveredAmount
+            }
+            if (typeof t.transaction.DestinationTag !== 'undefined') {
+              this.emit('transaction', {
+                amount: amount / 1000 / 1000,
+                from: t.transaction.Account,
+                to: t.transaction.Destination,
+                tag: t.transaction.DestinationTag,
+                hash: t.transaction.hash
+              })
+            }
           }
         })
         Connection.on('state', (s) => {})
         Connection.on('retry', (r) => {})
 
-        Connection.send({
-          command: 'server_info'
-        }).then((ServerInfo) => {
+        Connection.send({ command: 'server_info' }).then((ServerInfo) => {
           console.log('Connected to rippled', ServerInfo.info.pubkey_node, ServerInfo.info.build_version)
           resolve(this)
         }).catch((err) => {
