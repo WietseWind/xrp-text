@@ -27,5 +27,17 @@
   },
   "homepage": "https://github.com/WietseWind/xrp-text#readme",
   "license": "MIT",
-  "readmeFilename": "README.md"
+  "readmeFilename": "README.md",
+  "eslintConfig": {
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "extends": [
+      "standard"
+    ]
+  }
 }
