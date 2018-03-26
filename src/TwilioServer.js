@@ -28,7 +28,7 @@ class TwilioServer extends EventEmitter {
               // _all: r
             })
           }).catch(err => reject(err))
-        }, 60 * 1000)
+        }, 120 * 1000)
       })
     }
 
@@ -69,7 +69,8 @@ class TwilioServer extends EventEmitter {
             from: req.body.From,
             to: req.body.To,
             body: req.body.Body,
-            sid: req.body.MessageSid
+            sid: req.body.MessageSid,
+            country: req.body.FromCountry
           })
           // console.log(req.body.From, req.body.Body)
 
