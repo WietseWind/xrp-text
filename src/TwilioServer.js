@@ -23,7 +23,7 @@ class TwilioServer extends EventEmitter {
             return r.json()
           }).then((r) => {
             resolve({
-              price: parseFloat(r.price) * -1, 
+              price: parseFloat(r.price) * -1,
               unit: r.price_unit,
               sid: MessageSid,
               from: r.direction === 'inbound' ? r.from : r.to
@@ -47,7 +47,7 @@ class TwilioServer extends EventEmitter {
             resolve(message.sid)
             getTwilioMessagePrice(message.sid).then((p) => {
               this.emit('price', p)
-            })  
+            })
           }).catch((err) => {
             reject(err)
           })
@@ -83,10 +83,10 @@ class TwilioServer extends EventEmitter {
           res.writeHead(200, { 'Content-Type': 'text/xml' })
           res.end('')
         })
-        
+
         app.use('/', router)
-    
-        resolve(this)  
+
+        resolve(this)
       }).on('error', (err) => {
         reject(err)
       })
