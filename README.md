@@ -27,3 +27,9 @@ Launch the application:
 ```
 node index.js
 ```
+
+If you want to the application to auto-reload (for development) on change:
+
+```
+npm run dev
+```
