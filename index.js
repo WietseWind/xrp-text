@@ -243,7 +243,7 @@ Promise.all([ _config, _rippled, _twilio, _database ]).then((values) => {
          * Finalize 
          */
         let helpLimit = type === 'HELP' && user.helpcount > 0
-        let balanceLimit = type === 'BALANCE' && user.balancecount > 0 && user.balance < 1
+        let balanceLimit = type === 'BALANCE' && user.balancecount > 0
         let depositLimit = type === 'DEPOSIT' && user.depositcount > 0
         let onlyNumbers = message.body.trim().match(/^[0-9]+$/)
         if (helpLimit || balanceLimit || depositLimit || onlyNumbers) {
