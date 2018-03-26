@@ -12,6 +12,7 @@ CREATE TABLE `transactions` (
   `amount` decimal(20,6) DEFAULT NULL,
   `valid` int(1) unsigned NOT NULL DEFAULT '0',
   `twofactor` varchar(8) COLLATE utf8_bin DEFAULT NULL,
+  `origin` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user` (`user`),
   KEY `type` (`type`),
@@ -23,7 +24,8 @@ CREATE TABLE `transactions` (
   KEY `amount` (`amount`),
   KEY `valid` (`valid`),
   KEY `twofactor` (`twofactor`),
-  KEY `responsetype` (`responsetype`)
+  KEY `responsetype` (`responsetype`),
+  KEY `origin` (`origin`)
 ) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- Create syntax for TABLE 'users'
@@ -35,11 +37,13 @@ CREATE TABLE `users` (
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `lastno` varchar(20) COLLATE utf8_bin DEFAULT NULL,
+  `country` varchar(5) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`tag`),
   UNIQUE KEY `phone` (`phone`),
   KEY `wallet` (`wallet`),
   KEY `balance` (`balance`),
   KEY `created` (`created`),
   KEY `updated` (`updated`),
-  KEY `lastno` (`lastno`)
+  KEY `lastno` (`lastno`),
+  KEY `country` (`country`)
 ) ENGINE=MyISAM AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
