@@ -9,6 +9,8 @@ const app = express()
 
 class TwilioServer extends EventEmitter {
   constructor (config) {
+    process.env.TWILIO_AUTH_TOKEN = config.twilio.token
+
     super()
 
     const twilioClient = new twilio(config.twilio.sid, config.twilio.token)
@@ -64,7 +66,7 @@ class TwilioServer extends EventEmitter {
           res.json({ message: 'Hooray! welcome to our API!' })
         })
 
-        router.post('/', (req, res) => {
+        router.post('/', twilio.webhook(), (req, res) => {
           this.emit('message', {
             from: req.body.From,
             to: req.body.To,
