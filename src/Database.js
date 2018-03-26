@@ -26,6 +26,14 @@ class Database extends EventEmitter {
           })
         })
       },
+      insertConfirmedTransactions: (origin, xrp, fromUser, toUser) => {
+        let query = 'INSERT INTO `transactions` SET `user` = ?, `type` = ?, `amount` = ?, `valid` = 1, `origin` = ?, `from` = ?, `to` = ?'
+        return this.query(query, [ fromUser.tag, 'TRANSFER', xrp * -1, origin, fromUser.phone, toUser.phone ])
+          .then(result => this.query(query, [ toUser.tag, 'TRANSFER', xrp, origin, fromUser.phone, toUser.phone ]))
+      },
+      getTransaction: (txId) => {
+        return this.query('SELECT * FROM `transactions` WHERE `id` = ?', [ txId ])
+      },
       getUser: (phone) => {
         return new Promise((resolve, reject) => {
           let userQuery = 'SELECT `users`.*, ' +
@@ -57,25 +65,48 @@ class Database extends EventEmitter {
         })
       },
       persistInboundMessage: (user, message) => {
+        let txId
         return this.query('INSERT INTO `transactions` (`type`, `user`, `from`, `to`, `message`, `transaction`) VALUES (?, ?, ?, ?, ?, ?)', [
           'TEXTIN', user.tag, message.from, message.to, message.body, message.sid
-        ]).then(result => this.query('UPDATE `users` SET `lastno` = ? WHERE `tag` = ?', [ message.to, user.tag ]))
+        ]).then((result) => {
+          txId = result.insertId
+          return this.query('UPDATE `users` SET `lastno` = ?, `country` = ? WHERE `tag` = ?', [ message.to, message.country, user.tag ])
+        }).then(() => {
+          return txId
+        })
       },
       persistOutboundMessage: (user, message, sid, body, type) => {
+        let twofactor = (typeof message.authCode === 'string' ? message.authCode : null)
+        let origin = (typeof message.origin !== 'undefined' ? message.origin : null)
         type = (typeof type === 'string' && ([ 'BALANCE', 'HELP', 'DEPOSIT' ]).indexOf(type.toUpperCase()) > -1 ? type.toUpperCase() : null)
-        return this.query('INSERT INTO `transactions` (`type`, `user`, `from`, `to`, `message`, `transaction`, `responsetype`) VALUES (?, ?, ?, ?, ?, ?, ?)', [
-          'TEXTOUT', user.tag, message.to, message.from, body, sid, type
+        return this.query('INSERT INTO `transactions` (`type`, `user`, `from`, `to`, `message`, `transaction`, `responsetype`, `twofactor`, `origin`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', [
+          'TEXTOUT', user.tag, message.to, message.from, body, sid, type, twofactor, origin
         ])
+      },
+      findTxConfirmation: (tag, twofactor) => {
+        return this.query('SELECT * FROM `transactions` WHERE `user` = ? AND `twofactor` = ? AND `valid` < 1 AND `moment` > DATE_SUB(NOW(), INTERVAL 1 HOUR) ORDER BY `id` DESC LIMIT 1', [ tag, twofactor ])
+      },
+      confirmTx: (id) => {
+        return this.query('UPDATE `transactions` SET `valid` = 1 WHERE `id` = ?', [ id ])
+      },
+      updateUserBalance: (user) => {
+        return this.query('SELECT SUM(amount) as `balance` FROM `transactions` WHERE `valid` = 1 AND `user` = ?', [ user ])
+          .then(result => this.query('UPDATE `users` SET `balance` = ? WHERE `tag` = ?', [ result[0].balance, user ]))
+          .then(result => this.query('SELECT * FROM `users` WHERE `tag` = ?', [ user ]))
       },
       updateMessagePrice: (priceinfo, xrp) => {
         let user
-        return this.query('UPDATE `transactions` SET `amount` = ?, `valid` = 1 WHERE `transaction` = ?', [ xrp * -1, priceinfo.sid ])
+        let amount = xrp * -1
+        if (isNaN(amount)) {
+          amount = null
+          console.log('-- Invalid price', priceinfo)
+        }
+        return this.query('UPDATE `transactions` SET `amount` = ?, `valid` = IF(`twofactor` IS NULL, 1, `valid`) WHERE `transaction` = ?', [ amount, priceinfo.sid ])
           .then(result => this.query('SELECT `user` FROM `transactions` WHERE `transaction` = ?', [ priceinfo.sid ]))
           .then((transaction) => {
             user = transaction[0].user
-            return this.query('SELECT SUM(amount) as `balance` FROM `transactions` WHERE `valid` = 1 AND `user` = ?', [ user ])
+            return this.updateUserBalance(user)
           })
-          .then(result => this.query('UPDATE `users` SET `balance` = ? WHERE `tag` = ?', [ result[0].balance, user ]))
       },
       processTransaction: (transaction) => {
         return new Promise((resolve, reject) => {
@@ -89,12 +120,8 @@ class Database extends EventEmitter {
               this.query('INSERT INTO `transactions` (`type`, `user`, `from`, `to`, `message`, `transaction`, `amount`, `valid`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [
                 'DEPOSIT', user.tag, transaction.from, result[0].phone, null, transaction.hash, transaction.amount, 1
               ])
-              .then(result => this.query('SELECT SUM(amount) as `balance` FROM `transactions` WHERE `valid` = 1 AND `user` = ?', [ user.tag ]))
-              .then((result) => {
-                newBalance = result[0].balance
-                return this.query('UPDATE `users` SET `balance` = ? WHERE `tag` = ?', [ newBalance, user.tag ])
-              })
-              .then(result => resolve({ user: user, transaction: transaction, balance: newBalance }))
+              .then(result => this.updateUserBalance(user.tag))
+              .then(result => resolve({ user: result[0], transaction: transaction }))
               .catch(err => reject(err))
             } else {
               reject(new Error('Cannot find user for transaction (wallet + tag)'))

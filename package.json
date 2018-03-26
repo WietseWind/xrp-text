@@ -6,6 +6,7 @@
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.16.3",
+    "google-libphonenumber": "^3.1.2",
     "mysql": "^2.15.0",
     "node-fetch": "^2.1.1",
     "rippled-ws-client": "0.0.3",
@@ -16,7 +17,8 @@
     "src"
   ],
   "devDependencies": {
-    "eslint": "^4.19.1"
+    "eslint": "^4.19.1",
+    "nodemon": "^1.17.2"
   },
   "repository": {
     "type": "git",
@@ -39,5 +41,15 @@
     "extends": [
       "standard"
     ]
+  },
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      ".git/*",
+      "node_modules/*"
+    ],
+    "delay": "500"
   }
 }
