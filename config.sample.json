@@ -1,0 +1,24 @@
+{
+    "http": {
+      "port": 4000
+    },
+    "billing": {
+      "twilioFactor": 1.1
+    },
+    "twilio": {
+      "sid": "AC13467...d83e7",
+      "token": "8ba9...bd1b"
+    },
+    "ripple": {
+      "server": "wss://s1.ripple.com",
+      "account": "rHE...3G"
+    },
+    "database": {
+      "mysql": {
+        "host": "localhost",
+        "username": "user",
+        "password": "pass",
+        "database": "xrptext"
+      }
+    }
+  }
