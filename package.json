@@ -11,7 +11,8 @@
     "node-fetch": "^2.1.1",
     "rippled-ws-client": "0.0.3",
     "rippled-ws-client-sign": "0.0.3",
-    "twilio": "^3.14.0"
+    "twilio": "^3.14.0",
+    "websocket": "^1.0.25"
   },
   "main": "index.js",
   "files": [

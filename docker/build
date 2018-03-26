@@ -1,0 +1,19 @@
+#!/bin/bash
+
+self(){
+  DIR=$( cd "$( dirname "$0" )/" && pwd)
+  echo $DIR
+}
+
+echo "Stop and remove existing container"
+$(self)/down
+
+if [[ $(docker images -a|grep xrptext:latest|wc -l) -gt "0" ]]; then
+    echo "Removing image"
+    docker rmi -f xrptext:latest
+fi
+
+echo "Building image"
+docker build --tag xrptext:latest $(self)/../.
+
+echo "Done, you can now run $(self)/up"

@@ -1,0 +1,20 @@
+#!/bin/bash
+
+self(){
+  DIR=$( cd "$( dirname "$0" )/" && pwd)
+  echo $DIR
+}
+
+$(self)/down
+
+PORT=4000
+
+CUSTOMPORT=$(echo $1|egrep "^[0-9]+$"|wc -l)
+
+if [[ "$CUSTOMPORT" -gt "0" ]]; then
+    PORT=$1
+fi
+
+docker run -d --name xrptext -p $PORT:4000 --restart=always xrptext:latest
+
+docker logs -f xrptext
