@@ -225,6 +225,19 @@
               </small>
             </p>
           </div>
+          <div class="faq">
+            <h6>How can the bot integrate with my messages / contacts?</h6>
+            <p>
+              <small class="text-primary">
+                It can't. Thats why you send your messages to the bot,
+                the bot updates the funds of you (and the recipient)
+                in central database, and then
+                confirms the mutation by sending out another text. To you,
+                and -if you sent funds- to the recipient. So:<br />
+                <code>You » Bot » [database] ... Bot » Recipient</code>
+              </small>
+            </p>
+          </div>
         </div>
       </div>
     </div>
