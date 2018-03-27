@@ -89,7 +89,7 @@ Promise.all([ _config, _rippled, _twilio, _database ]).then((values) => {
           if (user.balance >= ParsedMessage.parsed.amount.xrp) {
             message.authCode = ((Math.random() * 100000000) + '').substring(0,7)
             type = 'TRANSFER'
-            body = `Send ${ParsedMessage.parsed.amount.xrp} XRP (${usd_amount} USD / ${eur_amount} EUR) to \n${ParsedMessage.parsed.destination} (${ParsedMessage.parsed.country}). To confirm, reply these 7 digits (within 1 hour):\n\n${message.authCode}`
+            body = `Send ${ParsedMessage.parsed.amount.xrp} XRP (${usd_amount} USD / ${eur_amount} EUR) to \n${ParsedMessage.parsed.destination}. To confirm, reply these 7 digits (within 1 hour):\n\n${message.authCode}`
             // body += `\n\nTo cancel, ignore this message.`
           } else {
             let balance = user.balance
