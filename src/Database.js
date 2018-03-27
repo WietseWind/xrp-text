@@ -41,11 +41,11 @@ class Database extends EventEmitter {
       getUser: (phone) => {
         return new Promise((resolve, reject) => {
           let userQuery = 'SELECT `users`.*, ' +
-            '(SELECT count(1) FROM `transactions` WHERE `phone` = ? AND `responsetype` = "HELP" AND `moment` > DATE_SUB(NOW(), INTERVAL 30 MINUTE)) as `helpcount`, ' +
-            '(SELECT count(1) FROM `transactions` WHERE `phone` = ? AND `responsetype` = "BALANCE" AND `moment` > DATE_SUB(NOW(), INTERVAL 30 MINUTE)) as `balancecount`, ' +
-            '(SELECT count(1) FROM `transactions` WHERE `phone` = ? AND `responsetype` = "DEPOSIT" AND `moment` > DATE_SUB(NOW(), INTERVAL 30 MINUTE)) as `depositcount` ' +
+            '(SELECT count(1) FROM `transactions` WHERE `user` = `users`.`tag` AND `responsetype` = "HELP" AND `moment` > DATE_SUB(NOW(), INTERVAL 30 MINUTE)) as `helpcount`, ' +
+            '(SELECT count(1) FROM `transactions` WHERE `user` = `users`.`tag` AND `responsetype` = "BALANCE" AND `moment` > DATE_SUB(NOW(), INTERVAL 30 MINUTE)) as `balancecount`, ' +
+            '(SELECT count(1) FROM `transactions` WHERE `user` = `users`.`tag` AND `responsetype` = "DEPOSIT" AND `moment` > DATE_SUB(NOW(), INTERVAL 30 MINUTE)) as `depositcount` ' +
             'FROM `users` WHERE `phone` = ?'
-          let userQueryBinding = [ phone, phone, phone, phone ]
+          let userQueryBinding = [ phone ]
           this.query(userQuery, userQueryBinding).then((UserInfo) => {
             if (UserInfo.length < 1) {
               // Create user
