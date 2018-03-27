@@ -159,7 +159,7 @@ Promise.all([ _config, _rippled, _twilio, _database ]).then((values) => {
                           let body = `Transfer complete, ${ParsedMessage.parsed.amount.xrp} XRP sent to ${destinationUser.phone}\n\nYour balance is now:\n${u.balance} XRP (${usd_amount} USD / ${eur_amount} EUR)`
                           let textFrom = user.lastno === null ? message.to : u.lastno
                           let m = { to: message.to, from: u.phone, origin: txRequest.id }
-                          twilio.send(textFrom, user.phone, body).then((sid) => database.persistOutboundMessage(u, m, sid, body))
+                          twilio.send(textFrom, user.phone, body).then((sid) => database.persistOutboundMessage(u, m, sid, body)).catch(err => console.log('Twilio Send SENDER err', err))
                         })
   
                         // Send message to recipient
@@ -169,13 +169,13 @@ Promise.all([ _config, _rippled, _twilio, _database ]).then((values) => {
                           let body = `You have received ${ParsedMessage.parsed.amount.xrp} XRP from ${user.phone}\n\nYour balance is now:\n${u.balance} XRP (${usd_amount} USD / ${eur_amount} EUR)`
                           let textFrom = destinationUser.lastno === null ? message.to : u.lastno
                           let m = { to: message.to, from: u.phone, origin: txRequest.id }
-                          twilio.send(textFrom, destinationUser.phone, body).then((sid) => database.persistOutboundMessage(u, m, sid, body))
+                          twilio.send(textFrom, destinationUser.phone, body).then((sid) => database.persistOutboundMessage(u, m, sid, body)).catch(err => console.log('Twilio Send RECIPIENT err', err))
                         })
                       })
                       .catch(err => console.log('!!!!!!! SHIT HITS THE FAN !!!!!!! TX CONFIRM ERROR', err))
                   } else {
                     body = `Sorry, your balance is insufficient.\n\nYour balance is currently ${user.balance} XRP, while ${ParsedMessage.parsed.amount.xrp} XRP is required to process this transaction.`
-                    twilio.send(txRequest.to, txRequest.from, body).then((sid) => database.persistOutboundMessage(user, message, sid, body))        
+                    twilio.send(txRequest.to, txRequest.from, body).then((sid) => database.persistOutboundMessage(user, message, sid, body)).catch(err => console.log('Twilio Send err', err))
                   }
                 }
               } else if (txConfirm.responsetype === 'WITHDRAWAL') {
@@ -215,7 +215,7 @@ Promise.all([ _config, _rippled, _twilio, _database ]).then((values) => {
                               let body = `Withdrawal complete, TX: ${txResponse.hash}\n\nYour new balance:\n${u.balance} XRP (${usd_amount} USD / ${eur_amount} EUR)`
                               let textFrom = user.lastno === null ? message.to : u.lastno
                               let m = { to: message.to, from: u.phone, origin: txRequest.id }
-                              twilio.send(textFrom, user.phone, body).then((sid) => database.persistOutboundMessage(u, m, sid, body))
+                              twilio.send(textFrom, user.phone, body).then((sid) => database.persistOutboundMessage(u, m, sid, body)).catch(err => console.log('Twilio Send err', err))
                             })
                           })
                           .catch((txError) => {
@@ -225,7 +225,7 @@ Promise.all([ _config, _rippled, _twilio, _database ]).then((values) => {
                   } else {
                     let blance = user.balance < 0 ? 0 : user.balance
                     body = `Sorry, your balance is insufficient.\n\nYour balance is currently ${balance} XRP, while ${ParsedMessage.parsed.amount} XRP is required to process this withdrawal.`
-                    twilio.send(txRequest.to, txRequest.from, body).then((sid) => database.persistOutboundMessage(user, message, sid, body))        
+                    twilio.send(txRequest.to, txRequest.from, body).then((sid) => database.persistOutboundMessage(user, message, sid, body)).catch(err => console.log('Twilio Send err', err))
                   }
                 }
               } else {
@@ -255,7 +255,7 @@ Promise.all([ _config, _rippled, _twilio, _database ]).then((values) => {
           twilio.send(message.to, message.from, body).then((sid) => {
             console.log('>> Outbound message', sid)
             database.persistOutboundMessage(user, message, sid, body, type)
-          })
+          }).catch(err => console.log('Twilio Send err', err))
         }
       }
     }).catch((err) => {
@@ -295,7 +295,7 @@ Promise.all([ _config, _rippled, _twilio, _database ]).then((values) => {
       twilio.send(message.from, message.to, body).then((sid) => {
         console.log('>> Deposit confirmation', sid)
         database.persistOutboundMessage(result.user, message, sid, body)
-      })
+      }).catch(err => console.log('Twilio Send err', err))
     }).catch((err) => {
       // Probably a transaction for another wallet 
       // console.log('!! Transaction error', err.message)
