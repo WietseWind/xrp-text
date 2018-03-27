@@ -111,7 +111,8 @@
             <p>
               <small class="text-primary">
                 You can send commands by sending a text message
-                to one of the numbers above. By sending a message
+                to one of the <i>XRP Text</i> bot numbers: <code>+3197004499330</code> and
+                <code>+16502977977</code>. By sending a message
                 to the <i>XRP Text</i> bot, you can deposit, withdraw or send
                 funds to another mobile phone number.
                 <br />
