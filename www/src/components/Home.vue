@@ -35,7 +35,7 @@
           <h4 class="my-0 font-weight-normal">Demo</h4>
         </div>
         <div class="card-body">
-          <video width="304" height="540" poster="/static/xrptext.png" autoplay>
+          <video style="max-width: 100%;" width="304" poster="/static/xrptext.png" autoplay>
             <source src="/static/xrptext.png" type="image/png" />
             <source src="/static/xrptext.gif" type="image/gif" />
             <source src="/static/xrptext.mp4" type="video/mp4" />
