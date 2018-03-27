@@ -14,14 +14,14 @@
         <h5>These are the XRP Text numbers you can send a message to:</h5>
         <div class="row">
           <div class="col text-primary">
-            <small class=""><b>NL</b></small>
-            <br />
-            <h3>+3197004499330</h3>
-          </div>
-          <div class="col text-primary">
-            <small class=""><b>US</b></small>
+            <small class=""><b>🌏 Global users (US  🇺🇸 number)</b></small>
             <br />
             <h3>+16502977977</h3>
+          </div>
+          <div class="col text-muted">
+            <small class="">🇳🇱 Users in NL (The Netherlands)</small>
+            <br />
+            <h3>+3197004499330</h3>
           </div>
         </div>
       </div>
