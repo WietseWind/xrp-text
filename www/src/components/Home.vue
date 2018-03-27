@@ -205,6 +205,16 @@
             </p>
           </div>
           <div class="faq">
+            <h6>Why don't I receive the <code>balance</code> or howto message?</h6>
+            <p>
+              <small class="text-primary">
+                Balance / howto messages are sent max. 1x per 30 minutes per
+                user to prevent balance drain caused by the message fee. You probably
+                received such a message recently.
+              </small>
+            </p>
+          </div>
+          <div class="faq">
             <h6>Where are my funds stored?</h6>
             <p>
               <small class="text-primary">
