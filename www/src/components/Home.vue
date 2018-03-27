@@ -11,7 +11,7 @@
 
     <div class="card box-shadow">
       <div class="card-body text-center">
-        <h5>This are the XRP Text numbers you can send a message to:</h5>
+        <h5>These are the XRP Text numbers you can send a message to:</h5>
         <div class="row">
           <div class="col text-primary">
             <small class=""><b>NL</b></small>
