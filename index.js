@@ -63,7 +63,7 @@ Promise.all([ _config, _rippled, _twilio, _database ]).then((values) => {
 
         if (ParsedMessage.parsed.valid) {
           if (ParsedMessage.parsed.amount > user.balance) {
-            type = 'BALANCE'
+            type = null
             body = `Sorry, your balance is insufficient.\n\nYour balance is currently ${user.balance} XRP.`
           } else {
             console.log('>>> VALID [withdraw message] from [user]', ParsedMessage.parsed, user)
@@ -73,7 +73,7 @@ Promise.all([ _config, _rippled, _twilio, _database ]).then((values) => {
           }
         } else {
           body = ParsedMessage.message + ` Use:\nwithdraw AMOUNT to WALLET TAG (tag optional).\n\nSample:\nwithdraw 2 to rPdvC6ccq8hCdPKSPJkPmyZ4Mi1oG2FFkT 123`
-        }      
+        }
       }
 
       /**
@@ -93,14 +93,14 @@ Promise.all([ _config, _rippled, _twilio, _database ]).then((values) => {
             // body += `\n\nTo cancel, ignore this message.`
           } else {
             let balance = user.balance
-            if (balance < 0) balance = 0    
+            if (balance < 0) balance = 0
             if (balance === 0) {
               type = 'DEPOSIT'
               body = `Sorry, you have no funds. \n\nDeposit XRP to:\n${user.wallet}\n\nUse Destination Tag:\n${user.tag}\n\nDO NOT FORGET THE DESTINATION TAG!`
             } else {
               type = 'BALANCE'
               body = `Sorry, your balance is insufficient.\n\nYour balance is currently ${balance} XRP.`
-            }            
+            }
           }
         } else {
           body = ParsedMessage.message + `\n\nSyntax:\n\nsend AMOUNT to PHONENUMBER\n\Eg.\nsend 1.2 usd to +31683164677`
@@ -151,7 +151,7 @@ Promise.all([ _config, _rippled, _twilio, _database ]).then((values) => {
                       .then(dbResult => database.updateUserBalance(user.tag))
                       .then(() => {
                         console.log('DONE :) All fine. Transfer processed. Now inform the users...')
-  
+
                         // Send message to sender
                         database.getUser(user.phone).then((u) => {
                           let usd_amount = price.get('usd', u.balance).toFixed(2)
@@ -161,7 +161,7 @@ Promise.all([ _config, _rippled, _twilio, _database ]).then((values) => {
                           let m = { to: message.to, from: u.phone, origin: txRequest.id }
                           twilio.send(textFrom, user.phone, body).then((sid) => database.persistOutboundMessage(u, m, sid, body)).catch(err => console.log('Twilio Send SENDER err', err))
                         })
-  
+
                         // Send message to recipient
                         database.getUser(destinationUser.phone).then((u) => {
                           let usd_amount = price.get('usd', u.balance).toFixed(2)
@@ -240,14 +240,14 @@ Promise.all([ _config, _rippled, _twilio, _database ]).then((values) => {
         }).catch(err => console.log('Error finding TxConfirmation transaction message.', err))
       } else {
         /**
-         * Finalize 
+         * Finalize
          */
         let helpLimit = type === 'HELP' && user.helpcount > 0
         let balanceLimit = type === 'BALANCE' && user.balancecount > 0
         let depositLimit = type === 'DEPOSIT' && user.depositcount > 0
         let onlyNumbers = message.body.trim().match(/^[0-9]+$/)
         if (helpLimit || balanceLimit || depositLimit || onlyNumbers) {
-          // This type of message has been sent recently, skip sending a 
+          // This type of message has been sent recently, skip sending a
           // message to prevent balance draining
           console.log('Skip message [type] [user]', type, user)
         } else {
@@ -286,7 +286,7 @@ Promise.all([ _config, _rippled, _twilio, _database ]).then((values) => {
       let usd_balance = price.get('usd', result.user.balance).toFixed(2)
       let eur_balance = price.get('eur', result.user.balance).toFixed(2)
       body = `Your deposit of ${transaction.amount} XRP is received!\n\nYour new balance is ${result.user.balance} XRP, this is ${usd_balance} USD / ${eur_balance} EUR.`
-      
+
       let message = {
         from: typeof result.user.lastno === 'string' ? result.user.lastno : config.twilio.defaultno,
         to: result.user.phone
@@ -297,7 +297,7 @@ Promise.all([ _config, _rippled, _twilio, _database ]).then((values) => {
         database.persistOutboundMessage(result.user, message, sid, body)
       }).catch(err => console.log('Twilio Send err', err))
     }).catch((err) => {
-      // Probably a transaction for another wallet 
+      // Probably a transaction for another wallet
       // console.log('!! Transaction error', err.message)
     })
   })
