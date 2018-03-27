@@ -7,7 +7,7 @@ const PhoneNumberFormat = libPhoneNumber.PhoneNumberFormat
 module.exports = (message, price) => {
   let parseMessage = `Sorry, your message could not be parsed.`
 
-  let matches = message.body.trim().toLowerCase().match(/^.*?[send]{3,}.*?([0-9,.]+)[ \r\n\t]+([a-z]{3,})?[to \r\n\t]{0,}([^a-z]+)[a-z]*?/)
+  let matches = message.body.trim().toLowerCase().match(/^.*?[send]{3,}.*?([0-9,.]+)[ \r\n\t]+([a-z]{3,})?[to \r\n\t]{0,}([^a-z]+)[a-z]*?/i)
   let parsed = {
     valid: false,
     rawAmount: typeof matches[1] !== 'undefined' ? matches[1].trim() : null,
@@ -31,6 +31,8 @@ module.exports = (message, price) => {
         if (phoneUtil.isValidNumber(numberLocal)) {
           parsed.valid = true
           parsed.destination = phoneUtil.format(numberLocal, PhoneNumberFormat.E164)
+        } else {
+          parseMessage = `Invalid destination phone number`
         }
       }
     } catch (e) {
