@@ -98,7 +98,7 @@ Promise.all([ _config, _rippled, _twilio, _database ]).then((values) => {
               type = 'DEPOSIT'
               body = `Sorry, you have no funds. \n\nDeposit XRP to:\n${user.wallet}\n\nUse Destination Tag:\n${user.tag}\n\nDO NOT FORGET THE DESTINATION TAG!`
             } else {
-              type = 'BALANCE'
+              type = null
               body = `Sorry, your balance is insufficient.\n\nYour balance is currently ${balance} XRP.`
             }
           }
