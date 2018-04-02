@@ -15,14 +15,14 @@ class Database extends EventEmitter {
             user: config.database.mysql.username,
             password: config.database.mysql.password,
             database: config.database.mysql.database
-          })      
+          })
           connection.query(query, parameters, (error, results, fields) => {
             connection.end()
             if (error) {
               reject(error)
             } else {
               resolve(results)
-            }        
+            }
           })
         })
       },
@@ -41,9 +41,9 @@ class Database extends EventEmitter {
       getUser: (phone) => {
         return new Promise((resolve, reject) => {
           let userQuery = 'SELECT `users`.*, ' +
-            '(SELECT count(1) FROM `transactions` WHERE `user` = `users`.`tag` AND `responsetype` = "HELP" AND `moment` > DATE_SUB(NOW(), INTERVAL 30 MINUTE)) as `helpcount`, ' +
-            '(SELECT count(1) FROM `transactions` WHERE `user` = `users`.`tag` AND `responsetype` = "BALANCE" AND `moment` > DATE_SUB(NOW(), INTERVAL 30 MINUTE)) as `balancecount`, ' +
-            '(SELECT count(1) FROM `transactions` WHERE `user` = `users`.`tag` AND `responsetype` = "DEPOSIT" AND `moment` > DATE_SUB(NOW(), INTERVAL 30 MINUTE)) as `depositcount` ' +
+            '(SELECT count(1) FROM `transactions` WHERE `user` = `users`.`tag` AND `responsetype` = "HELP" AND `moment` > DATE_SUB(NOW(), INTERVAL 30 SECOND)) as `helpcount`, ' +
+            '(SELECT count(1) FROM `transactions` WHERE `user` = `users`.`tag` AND `responsetype` = "BALANCE" AND `moment` > DATE_SUB(NOW(), INTERVAL 30 SECOND)) as `balancecount`, ' +
+            '(SELECT count(1) FROM `transactions` WHERE `user` = `users`.`tag` AND `responsetype` = "DEPOSIT" AND `moment` > DATE_SUB(NOW(), INTERVAL 30 SECOND)) as `depositcount` ' +
             'FROM `users` WHERE `phone` = ?'
           let userQueryBinding = [ phone ]
           this.query(userQuery, userQueryBinding).then((UserInfo) => {
@@ -97,7 +97,7 @@ class Database extends EventEmitter {
         return this.query('UPDATE `transactions` SET `transaction` = ? WHERE `id` = ?', [ hash, tx ])
       },
       updateUserBalance: (user) => {
-        // ALWAYS charge `twofactor` records, since `valid` is used to invalidate the record when used, but if there's an 
+        // ALWAYS charge `twofactor` records, since `valid` is used to invalidate the record when used, but if there's an
         // amount, it's the Text charge - and the Text charge needs to be charged to the user.
         return this.query('SELECT SUM(amount) as `balance` FROM `transactions` WHERE (`valid` = 1 OR (`valid` = 0 AND `twofactor` IS NOT NULL)) AND `user` = ?', [ user ])
           .then(result => this.query('UPDATE `users` SET `balance` = ? WHERE `tag` = ?', [ result[0].balance, user ]))
@@ -121,7 +121,7 @@ class Database extends EventEmitter {
       },
       processTransaction: (transaction) => {
         return new Promise((resolve, reject) => {
-          this.query('SELECT * FROM `users` WHERE (`wallet` = ? AND `tag` = ?) OR (`wallet` = ? AND `tag` = ?)', [ 
+          this.query('SELECT * FROM `users` WHERE (`wallet` = ? AND `tag` = ?) OR (`wallet` = ? AND `tag` = ?)', [
             transaction.from, transaction.tag,
             transaction.to, transaction.tag
           ]).then((result) => {
@@ -141,7 +141,7 @@ class Database extends EventEmitter {
         })
       }
     })
-    
+
     return new Promise((resolve, reject) => {
       this.query('SELECT 1 + 1 AS solution').then((results) => {
         if (results[0].solution === 2) {
