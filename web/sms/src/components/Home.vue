@@ -48,8 +48,14 @@
           <div class="col-12">&nbsp;<br />&nbsp;</div>
           <div class="col-sm-6">
             <div class="number global">
-              <h3>Global users</h3>
+              <h3>Global users (US)</h3>
               <p>+16502977977</p>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="number se">
+              <h3>Global users (SE)</h3>
+              <p>+46765193977</p>
             </div>
           </div>
           <div class="col-sm-6">
@@ -501,12 +507,15 @@ export default {
     background-repeat: no-repeat;
     background-position: 0px 0px;
     padding-top: 3px;
-    background-size: 40px;
+    background-size: 38px 38px;
     &.global {
-      background-image: url('/static/assets/icon_global.svg');
+      background-image: url('/static/assets/icon_global.png');
+    }
+    &.se {
+      background-image: url('/static/assets/icon_se.png');
     }
     &.nl {
-      background-image: url('/static/assets/icon_nl.svg');
+      background-image: url('/static/assets/icon_nl.png');
     }
     h3 {
       font-weight: 300;
