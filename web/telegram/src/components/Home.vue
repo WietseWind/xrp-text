@@ -21,14 +21,14 @@
             <div class="phone-container">
               <div class="phone">
                 <div class="screenshot">
-                  <video width="100%" poster="/static/screenshot.png" autoplay loop muted style="max-width: 100%;">
+                  <!-- <video width="100%" poster="/static/screenshot.png" autoplay loop muted style="max-width: 100%;">
                     <source src="/static/screenshot.png" type="image/png">
                     <source src="/static/iPhoneLow.mp4" type="video/mp4">
                     <param name="autoplay" value="true">
                     <param name="loop" value="true">
                     <param name="muted" value="true">
                     <param name="showlogo" value="false">
-                  </video>
+                  </video> -->
                 </div>
               </div>
             </div>
@@ -46,8 +46,8 @@
           </div>
           <div class="col-lg-2"></div>
           <div class="col-12">&nbsp;<br />&nbsp;
-            <p class="text-center">The only thing you need to do is click on "START" button in the bot and your journey will begin</p>
-            <p class="text-center">Join with <a href="https://t.me/RippledBot">@RippledBot</a></p>
+            <p class="text-center">The only thing you need to do is click on <code>START</code> button in the bot and your journey will begin!</p>
+            <p class="text-center"><a class="btn btn-primary btn-lg" target="_blank" href="https://t.me/RippledBot">Join with @RippledBot</a></p>
           </div>
         </div>
       </div>
@@ -85,17 +85,17 @@
           <div class="col-12">&nbsp;<br />&nbsp;</div>
           <div class="col-md-4 expl">
             <img class="icon" src="/static/assets/icon_send.svg" alt="Send" />
-            <h4>send <code>+amount</code>  <code>@username</code></h4>
+            <h4>/send <code>+amount</code>  <code>@username</code></h4>
             <p>Send the specified amount to a telegram member by username.</p>
           </div>
           <div class="col-md-4 expl">
             <img class="icon" src="/static/assets/icon_deposit.svg" alt="Deposit" />
-            <h4>deposit</h4>
+            <h4>/deposit</h4>
             <p>A destination wallet address and your personal destination tag will be shown, so you can fund your  account.</p>
           </div>
           <div class="col-md-4 expl">
             <img class="icon" src="/static/assets/icon_withdraw.svg" alt="Withdraw" />
-            <h4>withdraw <code>amount</code> <code>wallet</code></h4>
+            <h4>/withdraw <code>amount</code> <code>wallet</code></h4>
             <p>Withdraw the specified amount of XRP to the wallet (rXXX....). Your withdrawal will processed immediately.</p>
             <p>
               <small>
