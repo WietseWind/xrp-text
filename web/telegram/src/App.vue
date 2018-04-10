@@ -7,14 +7,10 @@
     <footer class="footer">
       <div class="container text-center">
         <small>
-          <span class="text-muted">By <a href="https://twitter.com/WietseWind" target="_blank">@WietseWind</a></span>
-          &dash;
-          <span class="text-muted"><a href="https://xrptipbot.com" target="_blank">xrptipbot.com</a></span>
-          &dash;
-          <span class="text-muted"><a href="https://ledger.exposed" target="_blank">ledger.exposed</a></span>
+          <span class="text-muted">By <a href="https://twitter.com/baltazar223" target="_blank">@baltazar223</a></span>
           &dash;
           Github:
-          <span class="text-muted"><a href="https://github.com/WietseWind/Xrp-Text" target="_blank">Source</a></span>
+          <span class="text-muted"><a href="https://github.com/N3TC4T/Ripple-Telegram-Bot" target="_blank">Source</a></span>
           &dash;
           Design by
           <span class="text-muted"><a href="http://twitter.com/dappyroots" target="_blank">@dappyroots</a></span>
