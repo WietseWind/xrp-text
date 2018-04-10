@@ -14,7 +14,7 @@
               that never used <b>XRP Text</b> before.
             </p>
 
-            <a href="#learn" class="btn btn-primary btn-lg"><i class="fa fa-info"></i> Learn more</a>
+            <a href="#learn" class="btn btn-success btn-lg"><i class="fa fa-info"></i> Learn more</a>
             <br /><br />&nbsp;
           </div>
           <div class="col-md-8 col-lg-6 text-center">
@@ -130,7 +130,7 @@
             <a name="sample"></a>
             <br />
             <br />
-            <a href="#sample" @click="sampleMsgs=true" class="btn btn-lg btn-primary"><i class="fa fa-search"></i> Sample messages</a>
+            <a href="#sample" @click="sampleMsgs=true" class="btn btn-lg btn-success"><i class="fa fa-search"></i> Sample messages</a>
           </div>
           <div class="col-lg-1 col-sm-2 text-sample" v-if="sampleMsgs"></div>
           <div class="col-lg-4 col-sm-8 text-sample text-left" v-if="sampleMsgs">
@@ -439,16 +439,17 @@ export default {
     .text {
       clear: both;
       max-width: 75%;
-      background-color: lighten( #cfcfcf, 10%);
+      background-color: lighten( #cfcfcf, 12%);
       border-radius: 15px;
       padding: 3px 15px;
       margin-bottom: 15px;
       &.in {
         float: right;
         text-align: right;
+        color: #666;
       }
       &.out {
-        background-color: #E2F1FC;
+        background-color: #EFF8F0;
         float: left;
       }
     }
@@ -462,7 +463,7 @@ export default {
       &.show {
         display: block;
         padding-top: 30px;
-        color: #327EC7;
+        color: #39B950;
         padding-bottom: 50px;
         background-image: none;
       }
@@ -552,7 +553,7 @@ export default {
     padding-top: 40px; padding-bottom: 40px;
     &.jumbotron {
       border-radius: 0; padding-bottom: 0;
-      border-bottom: 1px solid #327EC7;
+      border-bottom: 1px solid #39B950;
       margin-bottom: 0;
       div.phone-container {
         display: block; position: relative;
@@ -595,7 +596,7 @@ export default {
       }
     }
     &.blue {
-      background-color: #327EC7;
+      background-color: #39B950;
       color: #fff;
       a:not(.btn) {
         color: #FC992E;
@@ -606,11 +607,11 @@ export default {
     }
     &.white {
       background-color: #fff;
-      color: #327EC7;
+      color: #39B950;
     }
     &.lightblue {
-      background-color: #E2F1FC;
-      color: #327EC7;
+      background-color: lighten(#CAEACC, 10%);
+      color: #39B950;
     }
     &.dark {
       background-color: #3D3E3F;

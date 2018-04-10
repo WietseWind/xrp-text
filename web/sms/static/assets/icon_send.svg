@@ -3,8 +3,8 @@
 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="-49 141 512 512" style="enable-background:new -49 141 512 512;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:#297FCA;}
-	.st1{clip-path:url(#SVGID_2_);fill:#297FCA;}
+	.st0{fill:#39B950;}
+	.st1{clip-path:url(#SVGID_2_);fill:#39B950;}
 </style>
 <path class="st0" d="M101.1,309.1c-20.4,13.1-36.6,31.5-47.1,53.2c-2.4,5-0.3,11,4.7,13.3c5,2.4,11,0.3,13.3-4.7
 	c18.2-37.9,57.2-62.4,99.2-62.4c18,0,35.8,4.4,51.6,12.8c4.9,2.6,10.9,0.7,13.5-4.1c0.8-1.5,1.2-3.1,1.2-4.7c0-3.6-1.9-7-5.3-8.8
@@ -26,7 +26,7 @@
 			c-4.3,0-10-2.8-10-10c0-5.7,4.3-10,10-10c4.7,0,10-0.9,14.2-3.3c8.1-4.7,12.8-13.3,12.8-22.3c0-9-4.7-17.6-12.8-22.3
 			c-3.8-2.4-8.5-3.3-12.8-3.3C182.7,352.2,177.9,353.2,174.2,355.6"/>
 	</defs>
-	<use xlink:href="#SVGID_1_"  style="overflow:visible;fill:#297FCA;"/>
+	<use xlink:href="#SVGID_1_"  style="overflow:visible;fill:#39B950;"/>
 	<clipPath id="SVGID_2_">
 		<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
 	</clipPath>

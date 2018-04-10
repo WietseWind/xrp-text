@@ -53,7 +53,7 @@ body {
 
 .footer {
   a {
-    color: #327EC7;
+    color: #39B950;
   }
   position: absolute;
   bottom: 0;
