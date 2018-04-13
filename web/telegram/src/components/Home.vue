@@ -21,14 +21,14 @@
             <div class="phone-container">
               <div class="phone">
                 <div class="screenshot">
-                  <!-- <video width="100%" poster="/static/screenshot.png" autoplay loop muted style="max-width: 100%;">
+                  <video width="100%" poster="/static/screenshot.png" autoplay loop muted style="max-width: 100%;">
                     <source src="/static/screenshot.png" type="image/png">
                     <source src="/static/iPhoneLow.mp4" type="video/mp4">
                     <param name="autoplay" value="true">
                     <param name="loop" value="true">
                     <param name="muted" value="true">
                     <param name="showlogo" value="false">
-                  </video> -->
+                  </video>
                 </div>
               </div>
             </div>
