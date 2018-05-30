@@ -47,7 +47,7 @@
           <div class="col-lg-2"></div>
           <div class="col-12">&nbsp;<br />&nbsp;
             <p class="text-center">The only thing you need to do is click on <code>START</code> button in the bot and your journey will begin!</p>
-            <p class="text-center"><a class="btn btn-primary btn-lg" target="_blank" href="https://t.me/RippledBot">Join with @RippledBot</a></p>
+            <p class="text-center"><a class="btn btn-primary btn-lg" target="_blank" href="https://t.me/XRPBot">Join with @XRPBot</a></p>
           </div>
         </div>
       </div>
