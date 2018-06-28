@@ -60,8 +60,14 @@
           </div>
           <div class="col-sm-6">
             <div class="number nl">
-              <h3>Users in NL</h3>
+              <h3>Dutch users (NL)</h3>
               <p>+3197004499330</p>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="number de">
+              <h3>Users in Germany</h3>
+              <p>+4915735985977</p>
             </div>
           </div>
         </div>
@@ -517,6 +523,9 @@ export default {
     }
     &.nl {
       background-image: url('/static/assets/icon_nl.png');
+    }
+    &.de {
+      background-image: url('/static/assets/icon_de.png');
     }
     h3 {
       font-weight: 300;
