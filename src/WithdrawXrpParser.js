@@ -2,7 +2,7 @@
 
 module.exports = (message) => {
   let parseMessage = `Sorry, your message could not be parsed.`
-  let matches = message.trim().match(/^.*?[withdraw]{4,}.*?([0-9,.]+)[ \r\n\t]+(^r[a-z]{2,})?[to \r\n\t]{0,}(r[a-zA-Z0-9]{20,})([a-zA-Z, \r\t\n:]*[0-9]{1,})?/i)
+  let matches = message.trim().match(/^.*?[withdraw]{4,}.*?([0-9,.]+)[ \r\n\t]+(^r[a-z]{2,})?[to \r\n\t]{0,}(r[a-zA-Z0-9]{20,})([\.a-zA-Z, \r\t\n:]*[0-9]{1,})?/i)
 
   let parsed = {
     valid: false,
