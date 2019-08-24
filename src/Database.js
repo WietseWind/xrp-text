@@ -27,12 +27,12 @@ class Database extends EventEmitter {
         })
       },
       insertConfirmedTransactions: (origin, xrp, fromUser, toUser) => {
-        let query = 'INSERT INTO `transactions` SET `user` = ?, `type` = ?, `amount` = ?, `valid` = 1, `origin` = ?, `from` = ?, `to` = ?'
+        let query = 'INSERT IGNORE INTO `transactions` SET `user` = ?, `type` = ?, `amount` = ?, `valid` = 1, `origin` = ?, `from` = ?, `to` = ?'
         return this.query(query, [ fromUser.tag, 'TRANSFER', xrp * -1, origin, fromUser.phone, toUser.phone ])
           .then(result => this.query(query, [ toUser.tag, 'TRANSFER', xrp, origin, fromUser.phone, toUser.phone ]))
       },
       insertConfirmedWithdrawal: (origin, xrp, fromUser, walletAndDtag) => {
-        let query = 'INSERT INTO `transactions` SET `user` = ?, `type` = ?, `amount` = ?, `valid` = 1, `origin` = ?, `from` = ?, `to` = ?'
+        let query = 'INSERT IGNORE INTO `transactions` SET `user` = ?, `type` = ?, `amount` = ?, `valid` = 1, `origin` = ?, `from` = ?, `to` = ?'
         return this.query(query, [ fromUser.tag, 'WITHDRAW', xrp * -1, origin, fromUser.phone, walletAndDtag ])
       },
       getTransaction: (txId) => {
@@ -49,7 +49,7 @@ class Database extends EventEmitter {
           this.query(userQuery, userQueryBinding).then((UserInfo) => {
             if (UserInfo.length < 1) {
               // Create user
-              this.query('INSERT INTO `users` (`phone`, `wallet`) VALUES (?, ?)', [ phone, config.ripple.account ]).then((CreatedUser) => {
+              this.query('INSERT IGNORE INTO `users` (`phone`, `wallet`) VALUES (?, ?)', [ phone, config.ripple.account ]).then((CreatedUser) => {
                 if (typeof CreatedUser.insertId !== 'undefined' && CreatedUser.insertId > 0) {
                   this.query(userQuery, userQueryBinding).then((UserInfo) => {
                     if (UserInfo.length < 1) {
@@ -70,7 +70,7 @@ class Database extends EventEmitter {
       },
       persistInboundMessage: (user, message) => {
         let txId
-        return this.query('INSERT INTO `transactions` (`type`, `user`, `from`, `to`, `message`, `transaction`) VALUES (?, ?, ?, ?, ?, ?)', [
+        return this.query('INSERT IGNORE INTO `transactions` (`type`, `user`, `from`, `to`, `message`, `transaction`) VALUES (?, ?, ?, ?, ?, ?)', [
           'TEXTIN', user.tag, message.from, message.to, message.body, message.sid
         ]).then((result) => {
           txId = result.insertId
@@ -83,7 +83,7 @@ class Database extends EventEmitter {
         let twofactor = (typeof message.authCode === 'string' ? message.authCode : null)
         let origin = (typeof message.origin !== 'undefined' ? message.origin : null)
         type = (typeof type === 'string' && ([ 'HELP', 'BALANCE', 'DEPOSIT', 'WITHDRAWAL', 'TRANSFER' ]).indexOf(type.toUpperCase()) > -1 ? type.toUpperCase() : null)
-        return this.query('INSERT INTO `transactions` (`type`, `user`, `from`, `to`, `message`, `transaction`, `responsetype`, `twofactor`, `origin`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', [
+        return this.query('INSERT IGNORE INTO `transactions` (`type`, `user`, `from`, `to`, `message`, `transaction`, `responsetype`, `twofactor`, `origin`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', [
           'TEXTOUT', user.tag, message.to, message.from, body, sid, type, twofactor, origin
         ])
       },
@@ -128,7 +128,7 @@ class Database extends EventEmitter {
             if (result.length > 0) {
               let newBalance
               let user = result[0]
-              this.query('INSERT INTO `transactions` (`type`, `user`, `from`, `to`, `message`, `transaction`, `amount`, `valid`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [
+              this.query('INSERT IGNORE INTO `transactions` (`type`, `user`, `from`, `to`, `message`, `transaction`, `amount`, `valid`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [
                 'DEPOSIT', user.tag, transaction.from, result[0].phone, null, transaction.hash, transaction.amount, 1
               ])
               .then(result => this.updateUserBalance(user.tag))
