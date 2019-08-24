@@ -11,7 +11,7 @@
             <p>
               When sending funds, both you and the recipient will
               receive a text message, so you can even send XRP to people
-              that never used <b>XRP Text</b> before.
+              that have never used <b>XRP Text</b> before.
             </p>
 
             <a href="#learn" class="btn btn-success btn-lg"><i class="fa fa-info"></i> Learn more</a>
@@ -89,7 +89,7 @@
               <br />
               When sending funds, both you and the recipient will
               receive a text message, so you can even send XRP to people
-              that never used <b>XRP Text</b> before.
+              that have never used <b>XRP Text</b> before.
             </p>
           </div>
           <div class="col-lg-2"></div>
@@ -125,7 +125,7 @@
           <div class="col-md-4 expl">
             <img class="icon" src="/static/assets/icon_withdraw.svg" alt="Withdraw" />
             <h4>withdraw <code>amount</code> to <code>wallet</code></h4>
-            <p>Withdraw the specified amount of XRP to the wallet (rXXX....). Your withdrawal will processed immediately.</p>
+            <p>Withdraw the specified amount of XRP to the wallet (rXXX....). Your withdrawal will be processed immediately.</p>
             <p>
               <small>
                 You can append a space or colon to specify a destination tag for you withdrawal.
@@ -151,7 +151,7 @@
           <div class="col-lg-4 col-sm-8 text-sample text-left" v-if="sampleMsgs">
             <div class="text out"><u>send</u> <b>2</b> to <b>+316233...2191</b> </div>
             <div class="text in">Send <b>2 XRP</b><br />(1.23 USD / 1.00 EUR) to <b>+316233...2191</b><br />
-              To confirm, reply these 7 digits (within 1 hour):<br />
+              To confirm, reply using these 7 digits (within 1 hour):<br />
               <b>XXXXXXX</b>
             </div>
             <div class="clearfix"></div>
@@ -162,7 +162,7 @@
           <div class="col-lg-4 col-sm-8 text-sample text-left" v-if="sampleMsgs">
             <div class="text out"><u>send</u> <b>3 <span class="dark">USD</span></b> to <b>+316233...2191</b> </div>
             <div class="text in">Send <b>3 USD</b><br />(6.78901 XRP) to <b>+316233...2191</b><br />
-              To confirm, reply these 7 digits (within 1 hour):<br />
+              To confirm, reply using these 7 digits (within 1 hour):<br />
               <b>XXXXXXX</b>
             </div>
             <div class="clearfix"></div>
@@ -358,6 +358,21 @@
               confirms the mutation by sending out another text. To you,
               and -if you sent funds- to the recipient. So:<br />
               <code>You » Bot » [database] ... Bot » Recipient</code>
+          </p>
+        </div>
+      </div>
+      <div class="container-fluid lightblue faq">
+        <div class="container" :class="{ show: questionIsOpen(9) }">
+          <div @click="toggleQuestion(10)" class="question">
+            <h3>My phone says: "Not sent. Tap to try again"!</h3>
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid answer" :class="{ show: questionIsOpen(10) }">
+        <div class="container">
+          <p>
+              In some <a href="https://github.com/WietseWind/xrp-text/issues/4" target="_blank">rare cases</a> (Android + Verizon?) you can only send messages to
+              the US number if you first add the SMSText phone number to your contact list.
           </p>
         </div>
       </div>
