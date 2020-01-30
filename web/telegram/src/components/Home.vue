@@ -3,35 +3,12 @@
     <div class="container-fluid blue logo">
       <a href="/"><img src="/static/assets/Logo.svg" alt="XRP Text Logo" /></a>
     </div>
-    <div class="container-fluid blue jumbotron">
+    <div class="container-fluid bg-danger text-white h4 text-center jumbotron border-top border-top-1 border-white">
       <div class="container">
         <div class="row">
-          <div class="col-md-4 col-lg-6">
-            <h1>Send XRP using Telegram</h1>
-            <p>
-              When sending funds, both you and the recipient will
-              receive a text message, so you can even send XRP to people
-              that never used <b>XRP Text</b> before.
-            </p>
-
-            <a href="#learn" class="btn btn-primary btn-lg"><i class="fa fa-info"></i> Learn more</a>
-            <br /><br />&nbsp;
-          </div>
-          <div class="col-md-8 col-lg-6 text-center">
-            <div class="phone-container">
-              <div class="phone">
-                <div class="screenshot">
-                  <video width="100%" poster="/static/screenshot.png" autoplay loop muted style="max-width: 100%;">
-                    <source src="/static/screenshot.png" type="image/png">
-                    <source src="/static/iPhoneLow.mp4" type="video/mp4">
-                    <param name="autoplay" value="true">
-                    <param name="loop" value="true">
-                    <param name="muted" value="true">
-                    <param name="showlogo" value="false">
-                  </video>
-                </div>
-              </div>
-            </div>
+          <div class="col-12 mb-5">
+            Please note: the <b>Telegram XRP Bot</b> has been shut down in January 2020.
+            <br /><br />Please withdraw all funds ASAP.
           </div>
         </div>
       </div>
@@ -48,6 +25,16 @@
           <div class="col-12">&nbsp;<br />&nbsp;
             <p class="text-center">The only thing you need to do is click on <code>START</code> button in the bot and your journey will begin!</p>
             <p class="text-center"><a class="btn btn-primary btn-lg" target="_blank" href="https://t.me/XRPBot">Join with @XRPBot</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid bg-danger text-white h4 text-center jumbotron border-top border-top-1 border-white">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 mb-5">
+            Please note: the <b>Telegram XRP Bot</b> has been shut down in January 2020.
+            <br /><br />Please withdraw all funds ASAP.
           </div>
         </div>
       </div>
@@ -70,6 +57,16 @@
             </p>
           </div>
           <div class="col-lg-2"></div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid bg-danger text-white h4 text-center jumbotron border-top border-top-1 border-white">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 mb-5">
+            Please note: the <b>Telegram XRP Bot</b> has been shut down in January 2020.
+            <br /><br />Please withdraw all funds ASAP.
+          </div>
         </div>
       </div>
     </div>
@@ -148,6 +145,16 @@
         </div>
       </div>
     </div>
+    <div class="container-fluid bg-danger text-white h4 text-center jumbotron border-top border-top-1 border-white">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 mb-5">
+            Please note: the <b>Telegram XRP Bot</b> has been shut down in January 2020.
+            <br /><br />Please withdraw all funds ASAP.
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="container-fluid blue xtrapad">
       <div class="container text-center">
         <div class="row">
@@ -159,6 +166,16 @@
             </p>
           </div>
           <div class="col-lg-2"></div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid bg-danger text-white h4 text-center jumbotron border-top border-top-1 border-white">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 mb-5">
+            Please note: the <b>Telegram XRP Bot</b> has been shut down in January 2020.
+            <br /><br />Please withdraw all funds ASAP.
+          </div>
         </div>
       </div>
     </div>
@@ -197,6 +214,17 @@
         </div>
       </div>
     </div>
+    <div class="container-fluid bg-danger text-white h4 text-center jumbotron border-top border-top-1 border-white">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 mb-5">
+            Please note: the <b>Telegram XRP Bot</b> has been shut down in January 2020.
+            <br /><br />Please withdraw all funds ASAP.
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--
     <div class="container-fluid text-center dark">
       <div class="container">
           <h3><i class="fa fa-exclamation-triangle"></i> Please note!</h3>
@@ -206,7 +234,7 @@
             <small>I won't accept liability for any loss of funds.</small>
           </p>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
