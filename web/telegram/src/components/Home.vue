@@ -8,7 +8,7 @@
         <div class="row">
           <div class="col-12 mb-5">
             Please note: the <b>Telegram XRP Bot</b> has been shut down in January 2020.
-            <br /><br />Please withdraw all funds ASAP.
+            <br /><br />Please withdraw all funds before February 28 2020.
           </div>
         </div>
       </div>
@@ -34,7 +34,7 @@
         <div class="row">
           <div class="col-12 mb-5">
             Please note: the <b>Telegram XRP Bot</b> has been shut down in January 2020.
-            <br /><br />Please withdraw all funds ASAP.
+            <br /><br />Please withdraw all funds before February 28 2020.
           </div>
         </div>
       </div>
@@ -65,7 +65,7 @@
         <div class="row">
           <div class="col-12 mb-5">
             Please note: the <b>Telegram XRP Bot</b> has been shut down in January 2020.
-            <br /><br />Please withdraw all funds ASAP.
+            <br /><br />Please withdraw all funds before February 28 2020.
           </div>
         </div>
       </div>
@@ -150,7 +150,7 @@
         <div class="row">
           <div class="col-12 mb-5">
             Please note: the <b>Telegram XRP Bot</b> has been shut down in January 2020.
-            <br /><br />Please withdraw all funds ASAP.
+            <br /><br />Please withdraw all funds before February 28 2020.
           </div>
         </div>
       </div>
@@ -174,7 +174,7 @@
         <div class="row">
           <div class="col-12 mb-5">
             Please note: the <b>Telegram XRP Bot</b> has been shut down in January 2020.
-            <br /><br />Please withdraw all funds ASAP.
+            <br /><br />Please withdraw all funds before February 28 2020.
           </div>
         </div>
       </div>
@@ -219,7 +219,7 @@
         <div class="row">
           <div class="col-12 mb-5">
             Please note: the <b>Telegram XRP Bot</b> has been shut down in January 2020.
-            <br /><br />Please withdraw all funds ASAP.
+            <br /><br />Please withdraw all funds before February 28 2020.
           </div>
         </div>
       </div>
