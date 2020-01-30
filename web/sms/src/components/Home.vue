@@ -3,35 +3,14 @@
     <div class="container-fluid blue logo">
       <a href="/"><img src="/static/assets/Logo.svg" alt="XRP Text Logo" /></a>
     </div>
-    <div class="container-fluid blue jumbotron">
+    <div class="container-fluid bg-danger text-white h4 text-center jumbotron border-top border-top-1 border-white">
       <div class="container">
         <div class="row">
-          <div class="col-md-4 col-lg-6">
-            <h1>Send XRP using text messages</h1>
-            <p>
-              When sending funds, both you and the recipient will
-              receive a text message, so you can even send XRP to people
-              that have never used <b>XRP Text</b> before.
-            </p>
-
-            <a href="#learn" class="btn btn-success btn-lg"><i class="fa fa-info"></i> Learn more</a>
-            <br /><br />&nbsp;
-          </div>
-          <div class="col-md-8 col-lg-6 text-center">
-            <div class="phone-container">
-              <div class="phone">
-                <div class="screenshot">
-                  <video width="100%" poster="/static/screenshot.png" autoplay loop muted style="max-width: 100%;">
-                    <source src="/static/screenshot.png" type="image/png">
-                    <source src="/static/iPhoneLow.mp4" type="video/mp4">
-                    <param name="autoplay" value="true">
-                    <param name="loop" value="true">
-                    <param name="muted" value="true">
-                    <param name="showlogo" value="false">
-                  </video>
-                </div>
-              </div>
-            </div>
+          <div class="col-12 mb-5">
+            Please note: the <b>XRPText</b> has been shut down in January 2020.
+            <br /><br />Please withdraw all funds ASAP, by texting
+            <code class="text-white">withdraw</code> to
+            XRPText.
           </div>
         </div>
       </div>
@@ -73,6 +52,18 @@
         </div>
       </div>
     </div>
+    <div class="container-fluid bg-danger text-white h4 text-center jumbotron border-top border-top-1 border-white">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 mb-5">
+            Please note: the <b>XRPText</b> has been shut down in January 2020.
+            <br /><br />Please withdraw all funds ASAP, by texting
+            <code class="text-white">withdraw</code> to
+            XRPText.
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="container-fluid lightblue xtrapad">
       <div class="container text-center">
         <div class="row">
@@ -93,6 +84,18 @@
             </p>
           </div>
           <div class="col-lg-2"></div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid bg-danger text-white h4 text-center jumbotron border-top border-top-1 border-white">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 mb-5">
+            Please note: the <b>XRPText</b> has been shut down in January 2020.
+            <br /><br />Please withdraw all funds ASAP, by texting
+            <code class="text-white">withdraw</code> to
+            XRPText.
+          </div>
         </div>
       </div>
     </div>
@@ -185,6 +188,18 @@
         </div>
       </div>
     </div>
+    <div class="container-fluid bg-danger text-white h4 text-center jumbotron border-top border-top-1 border-white">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 mb-5">
+            Please note: the <b>XRPText</b> has been shut down in January 2020.
+            <br /><br />Please withdraw all funds ASAP, by texting
+            <code class="text-white">withdraw</code> to
+            XRPText.
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="container-fluid blue xtrapad">
       <div class="container text-center">
         <div class="row">
@@ -201,6 +216,18 @@
             </p>
           </div>
           <div class="col-lg-2"></div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid bg-danger text-white h4 text-center jumbotron border-top border-top-1 border-white">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 mb-5">
+            Please note: the <b>XRPText</b> has been shut down in January 2020.
+            <br /><br />Please withdraw all funds ASAP, by texting
+            <code class="text-white">withdraw</code> to
+            XRPText.
+          </div>
         </div>
       </div>
     </div>
@@ -377,7 +404,7 @@
         </div>
       </div>
     </div>
-    <div class="container-fluid text-center dark">
+    <!-- <div class="container-fluid text-center dark">
       <div class="container">
           <h3><i class="fa fa-exclamation-triangle"></i> Please note!</h3>
           <p>
@@ -385,6 +412,18 @@
             <br />
             <small>I won't accept liability for any loss of funds.</small>
           </p>
+      </div>
+    </div> -->
+    <div class="container-fluid bg-danger text-white h4 text-center jumbotron border-top border-top-1 border-white">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 mb-5">
+            Please note: the <b>XRPText</b> has been shut down in January 2020.
+            <br /><br />Please withdraw all funds ASAP, by texting
+            <code class="text-white">withdraw</code> to
+            XRPText.
+          </div>
+        </div>
       </div>
     </div>
   </div>
