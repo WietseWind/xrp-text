@@ -8,7 +8,7 @@
         <div class="row">
           <div class="col-12 mb-5">
             Please note: the <b>XRPText</b> has been shut down in January 2020.
-            <br /><br />Please withdraw all funds ASAP, by texting
+            <br /><br />Please withdraw all funds <b>BEFORE February 28th 2020</b>, by texting
             <code class="text-white">withdraw</code> to
             XRPText.
           </div>
@@ -57,7 +57,7 @@
         <div class="row">
           <div class="col-12 mb-5">
             Please note: the <b>XRPText</b> has been shut down in January 2020.
-            <br /><br />Please withdraw all funds ASAP, by texting
+            <br /><br />Please withdraw all funds <b>BEFORE February 28th 2020</b>, by texting
             <code class="text-white">withdraw</code> to
             XRPText.
           </div>
@@ -92,7 +92,7 @@
         <div class="row">
           <div class="col-12 mb-5">
             Please note: the <b>XRPText</b> has been shut down in January 2020.
-            <br /><br />Please withdraw all funds ASAP, by texting
+            <br /><br />Please withdraw all funds <b>BEFORE February 28th 2020</b>, by texting
             <code class="text-white">withdraw</code> to
             XRPText.
           </div>
@@ -193,7 +193,7 @@
         <div class="row">
           <div class="col-12 mb-5">
             Please note: the <b>XRPText</b> has been shut down in January 2020.
-            <br /><br />Please withdraw all funds ASAP, by texting
+            <br /><br />Please withdraw all funds <b>BEFORE February 28th 2020</b>, by texting
             <code class="text-white">withdraw</code> to
             XRPText.
           </div>
@@ -224,7 +224,7 @@
         <div class="row">
           <div class="col-12 mb-5">
             Please note: the <b>XRPText</b> has been shut down in January 2020.
-            <br /><br />Please withdraw all funds ASAP, by texting
+            <br /><br />Please withdraw all funds <b>BEFORE February 28th 2020</b>, by texting
             <code class="text-white">withdraw</code> to
             XRPText.
           </div>
@@ -419,7 +419,7 @@
         <div class="row">
           <div class="col-12 mb-5">
             Please note: the <b>XRPText</b> has been shut down in January 2020.
-            <br /><br />Please withdraw all funds ASAP, by texting
+            <br /><br />Please withdraw all funds <b>BEFORE February 28th 2020</b>, by texting
             <code class="text-white">withdraw</code> to
             XRPText.
           </div>
