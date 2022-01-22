@@ -8,7 +8,7 @@
     "express": "^4.16.3",
     "google-libphonenumber": "^3.1.2",
     "mysql": "^2.15.0",
-    "node-fetch": "^2.1.1",
+    "node-fetch": "^3.1.1",
     "rippled-ws-client": "0.0.3",
     "rippled-ws-client-sign": "0.0.3",
     "twilio": "^3.14.0",
